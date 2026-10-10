@@ -1,0 +1,15 @@
+{ "businesses": [
+ { "id":"biz-001","nameAr":"جباتي راشد","category":"restaurant","logo":null,"themeColor":"#1F5C4D","approval":"demo",
+   "branches":[{"id":"branch-001","labelAr":"عبدالله المبارك","placeId":"ChIJ_aTomeKZzz8RLgO2Hy19XaM","destinationVerified":false,"status":"active","updatedAt":"2026-10-10T00:00:00Z"}]},
+ { "id":"biz-002","nameAr":"مقهى الندى","category":"cafe","logo":"/logos/test-logo.svg","themeColor":"#7A3E1D","welcomeMessage":"نسعد بخدمتكم دائماً.","approval":"approved",
+   "branches":[
+    {"id":"branch-002","labelAr":"السالمية","placeId":"ChIJ_AAAAAAAAAAAAAAAAAAAAAA1","destinationVerified":true,"status":"active","updatedAt":"2026-10-10T00:00:00Z"},
+    {"id":"branch-003","labelAr":"حولي","placeId":"ChIJ_BBBBBBBBBBBBBBBBBBBBBB2","destinationVerified":true,"status":"active","welcomeMessage":"أهلاً بكم في فرع حولي.","updatedAt":"2026-10-10T00:00:00Z"},
+    {"id":"branch-004","labelAr":"الجهراء","placeId":"ChIJ_CCCCCCCCCCCCCCCCCCCCCC3","destinationVerified":true,"status":"disabled","updatedAt":"2026-10-10T00:00:00Z"}]},
+ { "id":"biz-003","nameAr":"صالون لمسة","category":"salon","logo":"/logos/missing.svg","themeColor":"#8A2D5B","approval":"approved",
+   "branches":[{"id":"branch-005","labelAr":"الفروانية","reviewUrl":"https://g.page/r/Cabcdefgh12345/review","destinationVerified":true,"status":"active","updatedAt":"2026-10-10T00:00:00Z"}]},
+ { "id":"biz-004","nameAr":"متجر الأفق","category":"retail","logo":null,"themeColor":"#1D4E89","approval":"withdrawn",
+   "branches":[{"id":"branch-006","labelAr":"الفحيحيل","placeId":"ChIJ_DDDDDDDDDDDDDDDDDDDDDD4","destinationVerified":true,"status":"active","updatedAt":"2026-10-10T00:00:00Z"}]},
+ { "id":"biz-005","nameAr":"ورشة النخبة","category":"service","logo":null,"themeColor":"#374151","approval":"demo",
+   "branches":[{"id":"branch-007","labelAr":"الشويخ","destinationVerified":false,"status":"draft","updatedAt":"2026-10-10T00:00:00Z"}]}
+]}

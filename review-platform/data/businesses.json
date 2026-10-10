@@ -1,0 +1,26 @@
+{
+  "businesses": [
+    {
+      "id": "biz-001",
+      "nameAr": "جباتي راشد",
+      "nameEn": null,
+      "category": "restaurant",
+      "logo": null,
+      "themeColor": "#1F5C4D",
+      "welcomeMessage": null,
+      "approval": "demo",
+      "branches": [
+        {
+          "id": "branch-001",
+          "labelAr": "عبدالله المبارك – الكويت",
+          "placeId": "ChIJ_aTomeKZzz8RLgO2Hy19XaM",
+          "reviewUrl": null,
+          "destinationVerified": false,
+          "welcomeMessage": null,
+          "status": "active",
+          "updatedAt": "2026-10-10T00:00:00.000Z"
+        }
+      ]
+    }
+  ]
+}

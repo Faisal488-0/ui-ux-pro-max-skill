@@ -1,0 +1,5 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": { "allowImportingTsExtensions": true, "noEmit": true },
+  "include": ["src", "scripts", "tests/unit.test.ts", "tests/build.test.ts", ".astro/types.d.ts"]
+}

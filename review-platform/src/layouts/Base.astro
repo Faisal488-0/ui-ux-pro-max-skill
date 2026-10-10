@@ -1,0 +1,20 @@
+---
+import '../styles/global.css';
+interface Props { title: string; themeColor?: string }
+const { title, themeColor = '#FAF8F4' } = Astro.props;
+---
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content={themeColor} />
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

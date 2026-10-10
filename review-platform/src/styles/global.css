@@ -1,0 +1,84 @@
+/* Tokens. 4/8px spacing rhythm; one type scale; contrast-checked colours (see UX_UI_AUDIT.md). */
+:root {
+  --bg: #faf8f4;
+  --surface: #ffffff;
+  --text: #1b1f23;
+  --text-2: #4a5560; /* 7.2:1 on --bg */
+  --line: #e6e1d8;
+  --accent: #1f5c4d; /* overridden per business; validated >= 4.5:1 against white */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+  --radius: 16px;
+  --font: "Noto Sans Arabic", "SamsungOne Arabic", "SF Arabic", "Geeza Pro", "Segoe UI", Tahoma, system-ui, sans-serif;
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 1rem; line-height: 1.6; }
+
+/* Golden-ratio optical centre: free space above : below = 1 : 1.618, so the card sits at ~38% height. */
+.page {
+  min-height: 100vh; min-height: 100svh;
+  display: grid; grid-template-rows: 1fr auto 1.618fr; justify-items: center;
+  padding: max(var(--s5), env(safe-area-inset-top)) max(var(--s4), env(safe-area-inset-right)) max(var(--s5), env(safe-area-inset-bottom)) max(var(--s4), env(safe-area-inset-left));
+}
+.card {
+  grid-row: 2; width: 100%; max-width: 26rem; text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+}
+.mark {
+  display: grid; place-items: center; width: 88px; height: 88px; margin-block-end: var(--s5);
+  border-radius: 28px; background: color-mix(in srgb, var(--accent) 9%, var(--surface)); color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--line));
+}
+.mark img { width: 64px; height: 64px; object-fit: contain; border-radius: 12px; }
+.mark .glyph { width: 40px; height: 40px; }
+.mark:has(img) .glyph { display: none; }
+.mark[data-fallback] img { display: none; }
+.mark[data-fallback] .glyph { display: block; }
+
+h1 { margin: 0; display: flex; flex-direction: column; gap: var(--s2); }
+.hello { font-size: 1.25rem; font-weight: 500; color: var(--text-2); line-height: 1.4; }
+.biz { font-size: clamp(2rem, 9vw, 2.75rem); font-weight: 800; line-height: 1.25; color: var(--accent); overflow-wrap: anywhere; }
+.branch { margin: var(--s2) 0 0; font-size: 0.9375rem; color: var(--text-2); }
+.msg { margin: var(--s4) 0 0; font-size: 1.0625rem; max-width: 22rem; }
+
+.cta {
+  margin-block-start: var(--s6); width: 100%; min-height: 60px; padding: var(--s3) var(--s5);
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s3);
+  background: var(--accent); color: #fff; border: 0; border-radius: var(--radius);
+  font: inherit; font-size: 1.1875rem; font-weight: 700; text-decoration: none; cursor: pointer;
+  box-shadow: 0 1px 2px rgb(16 24 40 / 0.12), 0 8px 20px -8px color-mix(in srgb, var(--accent) 60%, transparent);
+  transition: background-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+}
+.cta:hover { background: color-mix(in srgb, var(--accent) 88%, #000); }
+.cta:active { background: color-mix(in srgb, var(--accent) 78%, #000); box-shadow: 0 1px 2px rgb(16 24 40 / 0.2); }
+.cta:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
+.cta[aria-busy="true"] { opacity: 0.82; cursor: progress; }
+.cta svg { flex: none; width: 22px; height: 22px; }
+.cta[aria-busy="true"] svg { animation: spin 900ms linear infinite; }
+.cta[aria-busy="true"] svg path.arrow { display: none; }
+.cta svg .ring { display: none; }
+.cta[aria-busy="true"] svg .ring { display: inline; }
+
+.note { margin: var(--s3) 0 0; font-size: 0.9375rem; color: var(--text-2); }
+.status { min-height: 1.6em; margin: var(--s2) 0 0; font-size: 0.9375rem; font-weight: 500; color: var(--text); }
+.demo {
+  margin-block-start: var(--s5); padding: var(--s1) var(--s3); border-radius: 999px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--text-2); font-size: 0.8125rem;
+}
+
+/* Unavailable / not-found screen */
+.notice { grid-row: 2; text-align: center; max-width: 24rem; }
+.notice h1 { font-size: 1.5rem; }
+.notice p { color: var(--text-2); margin: var(--s3) 0 0; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+@media (min-width: 768px) {
+  .card { max-width: 30rem; }
+  .cta { max-width: 22rem; }
+}
+@media (max-height: 560px) { .mark { display: none; } .page { grid-template-rows: 1fr auto 1fr; } }
