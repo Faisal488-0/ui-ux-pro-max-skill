@@ -40,3 +40,12 @@ curl -s -o /dev/null -w "%{http_code}\n" https://<النطاق>/r/branch-999    
 ## 7) بدائل مجانية
 
 Netlify أو GitHub Pages يعملان أيضاً؛ ملف `_headers` يعمل على Netlify وCloudflare. على GitHub Pages لا تتوفر رؤوس HTTP المخصصة (فتفقد CSP كرأس) — لذا لا نوصي به.
+
+## 8) النشر على Vercel (تم فعلياً كنسخة تجريبية)
+
+- المشروع: `nfc-review` على حساب Vercel — الرابط الحالي: `https://nfc-review-faisalkabs-9775.vercel.app/r/branch-001`
+- رُفعت نسخة `dist/` المبنية مسبقاً (نفس الملفات التي اختُبرت)، مع `vercel.json` للرؤوس الأمنية. تم التحقق من الموقع الحي: 200 للفرع، 404 لمعرّف غير موجود، والرؤوس (CSP, HSTS, noindex…) تصل.
+- **حماية Vercel Authentication أُطفئت لهذا المشروع**؛ وإلا يُحوَّل الزائر إلى صفحة تسجيل دخول Vercel.
+- **تنبيه تجاري:** خطة Vercel المجانية (Hobby) مخصصة للاستخدام الشخصي غير التجاري وفق شروط Vercel. بيع بطاقات للأنشطة التجارية استخدام تجاري، فراجع الشروط الحالية؛ على الأرجح تحتاج خطة Pro (مدفوعة). Cloudflare Pages المجاني يسمح بالاستخدام التجاري.
+- ربط دومين: Project ← Settings ← Domains ← Add، ثم أضف سجل DNS الذي تطلبه Vercel عند مسجّل الدومين. **لا تكتب البطاقات قبل اختبار الدومين النهائي.**
+- التحديث التلقائي عبر Git يتطلب دمج الفرع في `main` (عبر PR) وربط المستودع بالمشروع وضبط Root Directory=`review-platform`. الملف `review-platform/vercel.json` في المستودع مخصص لذلك (بناء Astro).
