@@ -1,0 +1,13 @@
+---
+// Subtle, generic category glyphs (one stroke weight, one family). No brand marks, no ratings.
+interface Props { category: string }
+const { category } = Astro.props;
+const paths: Record<string, string> = {
+  restaurant: '<path d="M7 3v7a2 2 0 0 0 2 2v9"/><path d="M5 3v5"/><path d="M9 3v5"/><path d="M17 21V3c-2.5 1.5-3.5 4.5-3.5 8H17"/>',
+  cafe: '<path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H15.5"/><path d="M8 3v3"/><path d="M12 3v3"/>',
+  salon: '<circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M8 7.5 20 17"/><path d="M8 16.5 20 7"/>',
+  retail: '<path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+  service: '<path d="M14.5 6.5a4 4 0 0 0-5 5L4 17l3 3 5.5-5.5a4 4 0 0 0 5-5l-2.5 2.5-2-.5-.5-2 2.5-2.5Z"/>',
+};
+---
+<svg class="glyph" viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" set:html={paths[category] ?? paths.service} />

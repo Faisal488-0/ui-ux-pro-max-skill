@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import CategoryIcon from '../../components/CategoryIcon.astro';
+import { allBranches } from '../../lib/config.ts';
+import { isEffectivelyActive, resolveDestination } from '../../lib/validate.ts';
+
+export function getStaticPaths() {
+  return allBranches.map(({ biz, branch }) => ({ params: { id: branch.id }, props: { biz, branch } }));
+}
+const { biz, branch } = Astro.props;
+const live = isEffectivelyActive(biz, branch);
+const dest = live ? resolveDestination(branch) : null;
+const official = biz.approval === 'approved';
+const message = branch.welcomeMessage || biz.welcomeMessage || 'رأيك يهمنا ويساعدنا على تحسين خدماتنا.';
+// A logo is only ever shown for a business whose authorisation is confirmed.
+const logo = official && biz.logo ? biz.logo : null;
+---
+{!live || !dest ? (
+  <Base title="الصفحة غير متاحة">
+    <main class="page">
+      <section class="notice">
+        <h1>هذه الصفحة غير متاحة حالياً</h1>
+        <p>يرجى التواصل مع المنشأة مباشرة.</p>
+      </section>
+    </main>
+  </Base>
+) : (
+  <Base title={`${biz.nameAr} — تقييم`} themeColor={biz.themeColor}>
+    <main class="page" style={`--accent:${biz.themeColor}`}>
+      <section class="card" aria-labelledby="t">
+        <div class="mark" data-mark>
+          {logo && <img src={logo} alt="" width="64" height="64" data-logo />}
+          <CategoryIcon category={biz.category} />
+        </div>
+        <h1 id="t">
+          <span class="hello">شكراً لزيارتك!</span>
+          <span class="biz">{biz.nameAr}</span>
+        </h1>
+        <p class="branch">{branch.labelAr}</p>
+        <p class="msg">{message}</p>
+        <a class="cta" href={dest} rel="noopener noreferrer" data-review aria-describedby="n s">
+          <span>قيّم تجربتك على <bdi dir="ltr" lang="en">Google</bdi></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path class="arrow" d="M7 17 17 7M9 7h8v8" transform="scale(-1 1) translate(-24 0)"/>
+            <circle class="ring" cx="12" cy="12" r="9" stroke-dasharray="40 20"/>
+          </svg>
+        </a>
+        <p class="note" id="n">سيتم نقلك إلى Google لكتابة تقييمك بحرية.</p>
+        <p class="status" id="s" role="status" aria-live="polite" data-status></p>
+        {!official && <p class="demo">نموذج توضيحي غير رسمي</p>}
+      </section>
+    </main>
+    <script is:inline src="/r.js" defer></script>
+  </Base>
+)}
