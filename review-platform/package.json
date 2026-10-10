@@ -25,7 +25,8 @@
     "@types/node": "^22.20.5",
     "axe-core": "4.10.2",
     "playwright-core": "1.52.0",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "wrangler": "4.149.0"
   },
   "engines": {
     "node": ">=22.18.0"

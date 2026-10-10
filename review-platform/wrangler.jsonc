@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "nfc-review",
+  "compatibility_date": "2026-10-09",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+  // Custom domain is added after the final domain is chosen, e.g.:
+  // "routes": [{ "pattern": "r.example.com", "custom_domain": true }]
+}
