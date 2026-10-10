@@ -1,7 +1,8 @@
 // Local operator tool. There is deliberately NO public admin endpoint: changes are made here,
 // validated, committed to git and deployed. Usage: npm run admin -- <command> [args]
 import { readFileSync, writeFileSync } from 'node:fs';
-import { buildPlaceReviewUrl, resolveDestination, validateConfig, validateLedger, CATEGORIES, type Config, type Business, type Branch } from '../src/lib/validate.ts';
+import { randomInt } from 'node:crypto';
+import { RANDOM_ID_ALPHABET, buildPlaceReviewUrl, resolveDestination, validateConfig, validateLedger, CATEGORIES, type Config, type Business, type Branch } from '../src/lib/validate.ts';
 
 const F = new URL('../data/businesses.json', import.meta.url);
 const L = new URL('../data/assignments.lock.json', import.meta.url);
@@ -16,7 +17,12 @@ const find = (id?: string) => {
   return die(`unknown branch ${id}`);
 };
 const next = (prefix: string, ids: string[]) => `${prefix}-${String(Math.max(0, ...ids.map((i) => parseInt(i.split('-')[1]!, 10))) + 1).padStart(3, '0')}`;
-const issuedBranchIds = () => Object.keys(ledger);
+const newBranchId = () => {
+  for (;;) {
+    const id = Array.from({ length: 12 }, () => RANDOM_ID_ALPHABET[randomInt(RANDOM_ID_ALPHABET.length)]).join('');
+    if (!(id in ledger)) return id; // never collides with an id ever issued
+  }
+};
 
 /** "ChIJ…" => place id, "https://…" => direct review url. */
 function setDest(br: Branch, v: string) {
@@ -41,7 +47,7 @@ switch (cmd) {
     const [bid, labelAr, dest] = a;
     const b = biz(bid);
     if (!labelAr) die('usage: add-branch <biz-id> "<label>" [placeId|https-url]');
-    const id = next('branch', issuedBranchIds());
+    const id = newBranchId();
     const br: Branch = { id, labelAr: labelAr!, placeId: null, reviewUrl: null, destinationVerified: false, welcomeMessage: null, status: 'draft', updatedAt: now() };
     if (dest) setDest(br, dest);
     b.branches.push(br); ledger[id] = b.id; console.log('added', id, '→ NFC URL path: /r/' + id); break;

@@ -19,6 +19,7 @@
         { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
       ]
     },
+    { "source": "/_astro/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
     { "source": "/r.js", "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }] }
   ]
 }

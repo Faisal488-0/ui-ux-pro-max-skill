@@ -32,7 +32,10 @@ export interface Config {
 }
 
 export const CATEGORIES: readonly Category[] = ['restaurant', 'cafe', 'salon', 'retail', 'service'];
-export const BRANCH_ID_RE = /^[a-z][a-z0-9]{1,11}-\d{3,6}$/; // e.g. branch-001 (immutable once issued)
+// Immutable once issued. New ids are 12 random chars (unguessable => pages can't be enumerated);
+// legacy sequential ids (branch-001) stay valid for the demo.
+export const RANDOM_ID_ALPHABET = 'abcdefghjkmnpqrstuvwxyz23456789'; // no look-alikes (i l o 0 1)
+export const BRANCH_ID_RE = /^(?:[a-hj-km-np-z2-9]{12}|branch-\d{3,6})$/;
 export const BUSINESS_ID_RE = /^[a-z][a-z0-9]{1,11}-\d{3,6}$/;
 export const PLACE_ID_RE = /^[A-Za-z0-9_-]{20,200}$/;
 export const HEX_RE = /^#[0-9a-fA-F]{6}$/;

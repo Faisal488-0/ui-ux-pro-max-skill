@@ -28,7 +28,7 @@ npm run build        # -> dist/ (deploy this folder)
 |---|---|
 | `list` | All businesses/branches, status, DEMO vs OFFICIAL, verified flag, resolved Google URL (card→branch assignments) |
 | `add-business "<اسم>" <restaurant\|cafe\|salon\|retail\|service> [#hex]` | New business (starts as **demo**) |
-| `add-branch <biz-id> "<الفرع>" [placeId\|https-url]` | New branch; allocates the next immutable `branch-NNN`, status `draft` |
+| `add-branch <biz-id> "<الفرع>" [placeId\|https-url]` | New branch; allocates a random, unguessable, immutable 12-char id (e.g. `srgbyq37h4qf`), status `draft` |
 | `set-destination <branch-id> <placeId\|url>` | Change where the button goes (resets *verified*) |
 | `verify <branch-id>` | Mark destination verified **after you opened it and confirmed the business** |
 | `activate` / `disable <branch-id>` | Go live / switch a page off (shows a neutral "unavailable" notice) |

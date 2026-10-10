@@ -57,6 +57,10 @@ test('config validation catches errors', () => {
   assert.ok(validateConfig(mk({ approval: 'approved' })).some((e) => e.includes('unverified')));
   assert.deepEqual(validateConfig(mk({ approval: 'approved' }, { destinationVerified: true })), []);
 });
+test('branch ids: random 12-char and legacy accepted; guessable/odd forms rejected', () => {
+  for (const id of ['k7m2qx9d4hpt', 'branch-001']) assert.deepEqual(validateConfig(mk({}, { id })), [], id);
+  for (const id of ['k7m2qx9d4hp', 'k7m2qx9d4hptt', 'K7M2QX9D4HPT', 'k7m2qx9d4h0t', 'branch-1', '../etc', 'a b']) assert.ok(validateConfig(mk({}, { id })).length, id);
+});
 test('duplicate branch ids are rejected', () => {
   const c = mk(); c.businesses.push({ ...c.businesses[0]!, id: 'biz-002' });
   assert.ok(validateConfig(c).some((e) => e.includes('duplicate branch')));

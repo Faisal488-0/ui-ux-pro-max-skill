@@ -30,7 +30,7 @@
 cd review-platform
 npm run admin -- list                                             # عرض كل البطاقات/الفروع والحالة (تجريبي/رسمي)
 npm run admin -- add-business "مقهى الندى" cafe "#7A3E1D"          # نشاط جديد (تجريبي)
-npm run admin -- add-branch biz-002 "السالمية" ChIJxxxxxxxxxxxxxxxxxxxxxxx   # فرع جديد ← يُنشئ branch-002 (لا يتغير أبداً)
+npm run admin -- add-branch biz-002 "السالمية" ChIJxxxxxxxxxxxxxxxxxxxxxxx   # فرع جديد ← يُنشئ معرّفاً عشوائياً ثابتاً مثل srgbyq37h4qf (لا يتغير أبداً)
 npm run admin -- verify branch-002                                # بعد التحقق اليدوي
 npm run admin -- activate branch-002                              # تفعيل
 npm run admin -- set-destination branch-002 <placeId أو رابط>      # تعديل الوجهة بدون المساس ببطاقة NFC (يلغي «تم التحقق»)
@@ -47,7 +47,7 @@ npm run dev                                                       # معاينة
 
 ## 6) قواعد المعرّفات
 
-- `branch-NNN` **ثابت للأبد**: لا يُعاد استخدامه لنشاط آخر ولا يُحذف. للإيقاف استخدم `disable`. يفرض ذلك الملف `data/assignments.lock.json` ويفشل البناء عند المخالفة.
+- المعرّف (12 رمزاً عشوائياً، أو `branch-001` للتجربة فقط) **ثابت للأبد**: لا يُعاد استخدامه لنشاط آخر ولا يُحذف. للإيقاف استخدم `disable`. يفرض ذلك الملف `data/assignments.lock.json` ويفشل البناء عند المخالفة.
 - يمكنك تعديل `data/businesses.json` يدوياً، ثم شغّل `npm run validate` للتحقق.
 
 ## 7) حالات الصفحة
